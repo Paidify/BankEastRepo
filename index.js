@@ -8,6 +8,7 @@ const app = express()
 import paymentRoute from './src/routes/payment.route.js'
 import defaRoute from './src/routes/default.route.js' 
 import balanceRoute from './src/routes/balance.route.js'
+import validCardRoute from './src/routes/validCard.route.js'
 
 import createRoute from './src/routes/create.route.js'
 import cardRoute from './src/routes/card.route.js'
@@ -19,7 +20,7 @@ app.use(express.json())
 app.use('/', defaRoute)
 app.use('/makepay', paymentRoute)
 app.use('/checkbalance', balanceRoute)
-app.use('/cardexists', cardExistsRoute)
+app.use('/checkvalidcard', validCardRoute)
 
 app.use('/createUserBank', createRoute) //
 app.use('/createCard', cardRoute)       //
