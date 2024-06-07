@@ -7,7 +7,7 @@ export const checkingBalance = async (req, res) => {
   let cards;
   try {
     cards = await Card.find({
-      card_number: { $in: tarjetas.map((tarjeta) => +tarjeta.numero) },
+      card_number: { $in: tarjetas.map((tarjeta) => tarjeta.numero) },
     }).select("amount owner card_number card_type_id");
   } catch (err) {
     return res.status(500).json({ err });
@@ -20,9 +20,9 @@ export const checkingBalance = async (req, res) => {
     });
 
   const ok = tarjetas.every((tarjeta) => {
-    const card = cards.find((card) => card.card_number == +tarjeta.numero);
+    const card = cards.find((card) => card.card_number === tarjeta.numero);
     if (!card) return false;
-    return tarjeta.owner == card.owner && tarjeta.tipo == card.card_type_id;
+    return tarjeta.owner === card.owner && tarjeta.tipo === card.card_type_id;
   });
 
   if (!ok)

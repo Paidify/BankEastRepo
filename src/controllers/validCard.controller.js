@@ -9,7 +9,7 @@ export const checkValidCard = async (req, res) => {
   try {
     card = await Card.findOne({
       owner: nombre,
-      card_number: +nroTarjeta,
+      card_number: nroTarjeta,
       card_type_id: tipoTarjeta,
     });
   } catch (err) {

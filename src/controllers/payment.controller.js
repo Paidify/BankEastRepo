@@ -23,7 +23,7 @@ export const validationAndMake = async (req, res) => {
   const data = {
     reference_number: nroReferencia,
     amount: monto,
-    balance: monto / (mdPago == 1 ? nroCuotas : 1),
+    balance: monto / (mdPago === 1 ? nroCuotas : 1),
     successful: false,
     fulfilled: false,
     dues_number: nroCuotas,
@@ -136,11 +136,12 @@ export const validationAndMake = async (req, res) => {
         .json({ message: "Error", reason: "Insufficient balance", data });
     }
 
-    const cardUni = await Card.findOne({ owner: { $eq: "Universidad" } });
+    const cardUni = await Card.findOne({ owner_id: 1 });
 
     card.amount = card.amount - parseInt(deal.balance);
     cardUni.amount = cardUni.amount + monto;
-    await card.save(), cardUni.save();
+    await card.save();
+    await cardUni.save();
 
     deal.successful = true;
     if (deal.amount === deal.balance) deal.fulfilled = true;
@@ -150,6 +151,7 @@ export const validationAndMake = async (req, res) => {
       .status(200)
       .json({ message: "OK", reason: "Transaccion successful", data: deal });
   } catch (err) {
+    console.log(err);
     return res
       .status(500)
       .json({ message: "Error", reason: "Internal bank error", data });

@@ -9,7 +9,8 @@ const cardTypeSchema = new Schema({
 });
 
 cardTypeSchema.pre("save", async function (next) {
-  this.card_type_id = await Counter.getNextSequence("card_type_id");
+  if (this.card_type_id === undefined)
+    this.card_type_id = await Counter.getNextSequence("card_type_id");
   next();
 });
 

@@ -14,7 +14,7 @@ import createRoute from "./src/routes/create.route.js";
 import cardRoute from "./src/routes/card.route.js";
 
 if (process.env.TERMINAL_TITLE) {
-    process.title = process.env.TERMINAL_TITLE;
+  process.title = process.env.TERMINAL_TITLE;
 }
 
 //Middlewares

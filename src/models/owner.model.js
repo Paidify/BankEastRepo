@@ -11,7 +11,8 @@ const ownerSchema = new Schema({
 });
 
 ownerSchema.pre("save", async function (next) {
-  this.owner_id = await Counter.getNextSequence("owner_id");
+  if (this.owner_id === undefined)
+    this.owner_id = await Counter.getNextSequence("owner_id");
   next();
 });
 

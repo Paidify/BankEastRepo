@@ -15,7 +15,8 @@ const dealSchema = new Schema({
 });
 
 dealSchema.pre("save", async function (next) {
-  this.deal_id = await Counter.getNextSequence("deal_id");
+  if (this.deal_id === undefined)
+    this.deal_id = await Counter.getNextSequence("deal_id");
   next();
 });
 

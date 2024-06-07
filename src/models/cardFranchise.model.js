@@ -9,7 +9,8 @@ const cardFranchiseSchema = new Schema({
 });
 
 cardFranchiseSchema.pre("save", async function (next) {
-  this.card_franchise_id = await Counter.getNextSequence("card_franchise_id");
+  if (this.card_franchise_id === undefined)
+    this.card_franchise_id = await Counter.getNextSequence("card_franchise_id");
   next();
 });
 
