@@ -1,7 +1,7 @@
-import * as balanceController from '../controllers/balance.controller.js'
+import * as balanceController from "../controllers/balance.controller.js";
 import { Router } from "express";
-const router = Router()
+const router = Router();
 
-router.post('/', balanceController.checkingBalance)
+router.post("/", balanceController.checkingBalance);
 
-export default router
+export default router;

@@ -1,8 +1,8 @@
-import * as paymentController from '../controllers/payment.controller.js'
+import * as paymentController from "../controllers/payment.controller.js";
 import { Router } from "express";
 
-const router = Router()
+const router = Router();
 
-router.post('/', paymentController.validationAndMake)
+router.post("/", paymentController.validationAndMake);
 
-export default router
+export default router;

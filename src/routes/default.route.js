@@ -1,7 +1,7 @@
-import * as defaController from '../controllers/defa.Controller.js'
+import * as defaController from "../controllers/defa.Controller.js";
 import { Router } from "express";
-const router = Router()
+const router = Router();
 
-router.get('/', defaController.sending)
+router.get("/", defaController.sending);
 
-export default router
+export default router;

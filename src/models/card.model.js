@@ -1,8 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
+import Counter from "./counter.model.js";
+
 const { Schema, model } = mongoose;
 
 const cardSchema = new Schema({
-  id_card: { type: String, unique: true },
+  card_id: { type: Number, unique: true },
   owner: { type: String },
   owner_id: { type: String },
   exp_month: { type: String },
@@ -14,4 +16,9 @@ const cardSchema = new Schema({
   card_number: { type: Number, unique: true },
 });
 
-export default model('Card', cardSchema);
+cardSchema.pre("save", async function (next) {
+  this.card_id = await Counter.getNextSequence("card_id");
+  next();
+});
+
+export default model("card", cardSchema);

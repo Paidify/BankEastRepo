@@ -1,7 +1,7 @@
-import * as createController from '../controllers/create.controller.js'
+import * as createController from "../controllers/create.controller.js";
 import { Router } from "express";
-const router = Router()
+const router = Router();
 
-router.post('/', createController.createUserBank)
+router.post("/", createController.createUserBank);
 
-export default router
+export default router;

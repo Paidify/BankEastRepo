@@ -1,11 +1,18 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
+import Counter from "./counter.model.js";
+
 const { Schema, model } = mongoose;
 
 const ownerSchema = new Schema({
-  id_owner: { type: String, unique: true },
+  owner_id: { type: Number, unique: true },
   name: { type: String },
   email: { type: String, unique: true },
   DNI: { type: String, unique: true },
 });
 
-export default model('Owner', ownerSchema);
+ownerSchema.pre("save", async function (next) {
+  this.owner_id = await Counter.getNextSequence("owner_id");
+  next();
+});
+
+export default model("owner", ownerSchema);

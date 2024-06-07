@@ -1,7 +1,7 @@
-import * as validCardController from '../controllers/validCard.controller.js'
+import * as validCardController from "../controllers/validCard.controller.js";
 import { Router } from "express";
-const router = Router()
+const router = Router();
 
-router.post('/', validCardController.checkValidCard)
+router.post("/", validCardController.checkValidCard);
 
-export default router
+export default router;

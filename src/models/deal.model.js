@@ -1,14 +1,22 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
+import Counter from "./counter.model.js";
+
 const { Schema, model } = mongoose;
 
 const dealSchema = new Schema({
-    reference_number: { type: String, unique: true },
-    successful: { type: Boolean },
-    effective_date: { type: Date, default: new Date() },
-    amount: { type: Number },
-    balance: { type: Number },
-    dues_number: { type: Number },
-    fulfilled: { type: Boolean }
+  deal_id: { type: Number, unique: true },
+  reference_number: { type: String, unique: true },
+  successful: { type: Boolean },
+  effective_date: { type: Date, default: new Date() },
+  amount: { type: Number },
+  balance: { type: Number },
+  dues_number: { type: Number },
+  fulfilled: { type: Boolean },
 });
 
-export default model('deal', dealSchema);
+dealSchema.pre("save", async function (next) {
+  this.deal_id = await Counter.getNextSequence("deal_id");
+  next();
+});
+
+export default model("deal", dealSchema);
