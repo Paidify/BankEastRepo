@@ -13,6 +13,10 @@ import validCardRoute from "./src/routes/validCard.route.js";
 import createRoute from "./src/routes/create.route.js";
 import cardRoute from "./src/routes/card.route.js";
 
+if (process.env.TERMINAL_TITLE) {
+    process.title = process.env.TERMINAL_TITLE;
+}
+
 //Middlewares
 app.use(cors());
 app.use(express.json());
